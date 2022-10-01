@@ -1,15 +1,23 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { addPhoto, getPhotos } from '../requests';
+import { addPhoto, getPhotos, APIURL } from '../requests';
 import PhotoContext from '../context/Photo';
 
 const imageMimeType = /image\/(png|jpg|jpeg|gif)/i;
 
 export const FileUploadPage = () => {
- 
+  const { photo, setPhoto } = useContext(PhotoContext); 
   const [file, setFile] = useState("");
   const [name, setName] = useState(null);
   const [fileDataURL, setFileDataURL] = useState(null);
   const [initialized, setInitialized] = useState(false);
+  
+  const getAllPhotos = async () => {
+    const response = await getPhotos();
+    setPhoto(response.data);
+  };
+
+  getAllPhotos();
+  console.log(photo);
 
   const handleFileNameInput = e => {
     setName(e.target.value);
