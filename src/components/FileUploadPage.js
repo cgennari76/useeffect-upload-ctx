@@ -16,8 +16,13 @@ export const FileUploadPage = () => {
     setPhoto(response.data);
   };
 
-  getAllPhotos();
-  console.log(photo);
+  useEffect(() => {
+    if (!initialized) {
+      getAllPhotos();
+      setInitialized(true);
+    }
+  });
+  console.log(photo)
 
   const handleFileNameInput = e => {
     setName(e.target.value);
