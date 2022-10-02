@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import FileUploadPage from './components/FileUploadPage';
 import PhotoContext from './context/Photo';
+import './App.css';
 
 function App() {
-  const [photo, setPhoto] = useState();
+  const [photo, setPhoto] = useState([]);
 
   return (
     <PhotoContext.Provider value={{photo, setPhoto}}>

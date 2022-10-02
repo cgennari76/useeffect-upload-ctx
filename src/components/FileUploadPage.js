@@ -22,7 +22,18 @@ export const FileUploadPage = () => {
       setInitialized(true);
     }
   });
-  console.log(photo)
+ 
+  const render = photo && photo.length>0 && photo.map((p)=> {
+    const splitPath = p['photoPath'].split("/")
+    const path = splitPath[splitPath.length - 1]
+    return ( 
+      <li key={p['id']}>
+        <h3> Photo: {path}</h3>
+        <img src={`http://localhost:8000/${path}`} alt={p['name']} />
+      </li>
+    )
+  });
+
 
   const handleFileNameInput = e => {
     setName(e.target.value);
@@ -46,6 +57,7 @@ export const FileUploadPage = () => {
 
   return (
     <div>
+    {render}
       <form encType="multipart/form-data" method="post" onSubmit={handleSubmit} >
         <input type="text" value={name} onChange={handleFileNameInput} />
         <input type="file" accept=".gif" name="photo" onChange={handleFileUploadInput} />
